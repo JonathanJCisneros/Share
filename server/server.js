@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 const port = 8000;
-
+require('dotenv').config();
 require('./config/mongoose.config')
 
 app.use(cors());
