@@ -20,7 +20,7 @@ const Credentials = (props) => {
     const submitHandler = (e) => {
         e.preventDefault()
         {newOrUpdate === false?
-            axios.post(`http://localhost:8000/api/user/login`, {email, password})
+            axios.post(`http://localhost:8000/api/user/login`, {email, password}, {withCredentials : true})
                 .then(res => navigate('/feed'))
                 .catch(err => setErrors(err.response.data.errors)):
             axios.post(`http://localhost:8000/api/user/register`, {firstName, lastName, email, password, confirmPassword}, {withCredentials : true})

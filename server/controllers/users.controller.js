@@ -17,7 +17,7 @@ module.exports = {
                 if(userEmail.length === 0){
                     User.create(req.body)
                         .then(user => {
-                            const userToken = jwt.sign({id : user._id, firstName : user.firstName, lastName : user.lastName, email : user.email}, process.env.SECRET_KEY);
+                            const userToken = jwt.sign({id : user._id}, process.env.SECRET_KEY);
                             res
                                 .cookie("usertoken", userToken, process.env.SECRET_KEY, {httpOnly: true})
                                 .json(user);
@@ -41,10 +41,18 @@ module.exports = {
         if(!correctPassword) {
             return res.status(400).json({errors : {password : {message : "Incorrect Password"}}});
         }
-        const userToken = jwt.sign({id : user._id, firstName : user.firstName, lastName : user.lastName, email : user.email}, process.env.SECRET_KEY);
+        const userToken = jwt.sign({id : user._id}, process.env.SECRET_KEY);
         res
             .cookie("usertoken", userToken, process.env.SECRET_KEY, {httpOnly : true})
             .json(user);
+    },
+
+
+    checkIfUser : (req, res) => {
+        const decodedJWT = jwt.decode(req.cookies.usertoken, {complete : true})
+        User.findOne({_id : decodedJWT.payload.id})
+            .then(user => res.json(user))
+            .catch(err => res.json(err))
     },
 
 
