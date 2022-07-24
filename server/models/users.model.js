@@ -15,6 +15,16 @@ const UserSchema = new mongoose.Schema({
         minlength : [2, "Last Name must be at least 2 characters long"]
     },
 
+    animal : {
+        type : String,
+        required : [true, "Avatar is required"]
+    },
+
+    color : {
+        type : String,
+        required : [true, "Color is required"]
+    },
+
     email : {
         type : String,
         required : [true, "Email is required"],

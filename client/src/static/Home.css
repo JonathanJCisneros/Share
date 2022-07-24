@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+
+* {
+    margin: 0px auto;
+    padding: 0px;
+}
+
+.page {
+    background-color: #F5EFED;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+.header {
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    height: 150px;
+    background-color: #A2BCE0;
+}
+
+.title {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 75px;
+    color: white;
+}
+
+.login {
+    margin-top: 250px;
+    width: 600px;
+}
