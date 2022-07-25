@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const animalList = ["Alligator", "Anteater", "Armadillo", "Auroch", "Axolotl", "Badger", "Bat", "Beaver", "Buffalo", "Camel", "Capybara", "Chameleon", "Cheetah", "Chinchilla", "Chipmunk", "Chupacabra", "Cormorant", "Coyote", "Crow", "Dingo", "Dinosaur", "Dolphin", "Duck", "Elephant", "Ferret", "Fox", "Frog", "Giraffe", "Gopher", "Grizzly", "Hedgehog", "Hippo", "Hyena", "Ibex", "Ifrit", "Iguana", "Jackal", "Kangaroo", "Koala", "Kraken", "Lemur", "Leopard", "Liger", "Llama", "Manatee", "Mink", "Monkey", "Moose", "Narwhal", "Orangutan", "Otter", "Panda", "Penguin", "Platypus", "Pumpkin", "Python", "Quagga", "Rabbit", "Raccoon", "Rhino", "Sheep", "Shrew", "Skunk", "Squirrel", "Tiger", "Turtle",  "Walrus", "Wolf", "Womba", "Wolverine"]
 
 const Credentials = (props) => {
-    const {initialFirstName, initialLastName, initialAnimal, initialColor, initialEmail, initialType} = props;
+    const {user, initialFirstName, initialLastName, initialAnimal, initialColor, initialEmail, initialType, initialProfile, callBack} = props;
     const [firstName, setFirstName] = useState(initialFirstName);
     const [lastName, setLastName] = useState(initialLastName);
     const [animal, setAnimal] = useState(initialAnimal);
@@ -16,6 +16,7 @@ const Credentials = (props) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [newOrUpdate, setNewOrUpdate] = useState(initialType)
+    const [updateProfile, setUpdateProfile] = useState(initialProfile)
 
     
     const [errors, setErrors] = useState({})
@@ -29,7 +30,11 @@ const Credentials = (props) => {
             axios.post(`http://localhost:8000/api/user/login`, {email, password}, {withCredentials : true})
                 .then(res => navigate('/feed'))
                 .catch(err => setErrors(err.response.data.errors)):
-            axios.post(`http://localhost:8000/api/user/register`, {firstName, lastName, animal, color, email, password, confirmPassword}, {withCredentials : true})
+            updateProfile?
+                axios.put(`http://localhost:8000/api/user/update/${user}`, {firstName, lastName, animal, color, email, password})
+                    .then(res => callBack())
+                    .catch(err => setErrors(err.response.data.errors))
+                :axios.post(`http://localhost:8000/api/user/register`, {firstName, lastName, animal, color, email, password, confirmPassword}, {withCredentials : true})
                 .then(res => navigate('/feed'))
                 .catch(err => setErrors(err.response.data.errors))
         }
@@ -40,7 +45,10 @@ const Credentials = (props) => {
                 <form onSubmit={submitHandler}>
                     {newOrUpdate === true?
                     <>
-                        <h1>Register</h1>
+                        {updateProfile? 
+                            <h1 className='formTitle'>Update Profile</h1>:
+                            <h1 className='formTitle'>Register</h1>
+                        }
                         <div className='row'>
                             <div className='col'>
                                 <label htmlFor="firstName" className='form-label'>First Name: </label>
@@ -56,7 +64,7 @@ const Credentials = (props) => {
                         <div className='col-12' id='animal'>
                             <div>
                                 <label htmlFor="animal">Select Avatar</label>
-                                <select class="form-select" name='animal' onChange={e => setAnimal(e.target.value)} value={animal} aria-label="Default select example">
+                                <select className="form-select" name='animal' onChange={e => setAnimal(e.target.value)} value={animal} aria-label="Default select example">
                                     <option selected>Choose your avatar...</option>
                                     {animalList.map((animal, i) => <option key={i} value={animal.toLowerCase()}>{animal}</option>)}
                                 </select>
@@ -68,12 +76,12 @@ const Credentials = (props) => {
                                 <input type="color" name='color' onChange={(e) => setColor(e.target.value)} value={color}/>
                                 {errors.hasOwnProperty("color")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.color.message}</p>}
                             </div>
-                            <div className='registerProfileImage' style={{backgroundColor : color}}>
+                            <div className='registerProfileImage' style={{backgroundColor : color === ""? "lightgray": color}}>
                                 <img src={`https://anonymous-animals.azurewebsites.net/animal/${animal}`} alt="Animal" />
                             </div>
                         </div>
                     </>
-                    :<h1>Login</h1>
+                    :<h1 className='formTitle'>Login</h1>
                     }
                     <div className='col-12'>
                         <label htmlFor="email" className='form-label'>Email: </label>
@@ -87,17 +95,25 @@ const Credentials = (props) => {
                     </div>
                     {newOrUpdate === true?
                     <>
-                        <div>
+                        {updateProfile? ""
+                        :<div>                            
                             <label htmlFor="confirmPassword" className='form-label'>Confirm Password: </label>
                             <input type="password" className='form-control' name='confirmPassword' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword}/>
                             {errors.hasOwnProperty("confirmPassword")&&<p style={{color : "red", fontWeight : "bold"}}>{errors.confirmPassword.message}</p>}
-                        </div>
-                        <button type='button' className='btn btn-link' onClick={()=>setNewOrUpdate(false) + setErrors({}) + setFirstName("") + setLastName("") + setAnimal('') + setEmail("") + setPassword("")}>I have an account, Go Back!</button>
+                        </div>}
+                        {updateProfile?
+                            <button className='btn btn-link' onClick={()=> callBack()}>Nevermind...</button>:
+                            <button type='button' className='btn btn-link' onClick={()=>setNewOrUpdate(false) + setErrors({}) + setFirstName("") + setLastName("") + setAnimal('') + setEmail("") + setPassword("")}>I have an account, Go Back!</button>
+                        }
                     </>
                         :<button type='button' className='btn btn-link' onClick={()=>setNewOrUpdate(true) + setErrors({}) + setEmail("") + setPassword("")}>Don't have an account yet? Sign Up!</button>
                     }
                     <br />
-                    <button type='submit' className='btn btn-success'>{newOrUpdate? "Create Account": "Log In"}</button>
+                    <button type='submit' className='btn btn-success'>
+                        {newOrUpdate? 
+                            updateProfile? "Update": "Create Account"
+                            : "Log In"}
+                    </button>
                 </form>
             </div>
     )

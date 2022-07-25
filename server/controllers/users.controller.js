@@ -61,6 +61,12 @@ module.exports = {
         res.sendStatus(200);
     },
 
+    updateUser : (req, res) => {
+        User.findOneAndUpdate(req.params, req.body, {new : true, runValidators : true})
+            .then(update => res.json(update))
+            .catch(err => res.status(400).json(err))
+    },
+
     deleteUser : (req, res) => {
         User.deleteOne(req.params)
             .then(deleteConfirm => res.json(deleteConfirm))

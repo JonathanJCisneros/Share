@@ -13,7 +13,7 @@ const Home = () => {
             </div>
             {location.state !== null?<h2 style={{color : "red", fondWeight : "bold"}}>{location.state.message}</h2>: ""}
             <div className='login'>
-                <Credentials initialFirstName="" initialLastName="" initialEmail="" initialAnimal="" initialColor="" initialType={false}/>
+                <Credentials initialFirstName="" initialLastName="" initialEmail="" initialAnimal="" initialColor="" initialType={false} initialProfile={false}/>
             </div>
         </div>
     )
