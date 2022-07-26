@@ -4,7 +4,7 @@ const User = require('../models/users.model');
 
 module.exports = {
     getAll : (req, res) => {
-        PostModel.find()
+        PostModel.find({}).sort({ createdAt : -1 })
             .then(posts => res.json(posts))
             .catch(err => res.json(err))
     },
@@ -28,19 +28,9 @@ module.exports = {
     },
 
     newPost : async(req, res) => {
-        
         const newPost = new PostModel(req.body)
         await newPost.save()
-        
-        const decodedJWT = jwt.decode(req.cookies.usertoken, {complete : true})
-        await User.findOne({_id : decodedJWT.payload.id})
-            .then(user => {
-                user.posts.push(newPost)
-                user.confirmPassword = user.password
-                user.save()
-                .then(user => res.json(user))
-                .catch(err => res.status(400).json(err))
-            })
-            .catch(err => res.status(400).json(err))
+        await User.findOneAndUpdate({_id : newPost.userId}, {$push: {posts : newPost}})
+        res.json(newPost)
     }
 }

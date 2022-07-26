@@ -26,7 +26,7 @@ const PostList = (props) => {
 
     const createPost = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:8000/api/post`, {animal : user.animal, color: user.color, userId : user._id, title, content, likes : 0}, {withCredentials : true})
+        axios.post(`http://localhost:8000/api/post`, {animal : user.animal, color: user.color, userId : user._id, title, content, likes : 0})
             .then(res => setAddPost(false) + setTitle("") + setContent(""))
             .catch(err => console.log(err.response))
     }

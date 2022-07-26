@@ -12,7 +12,6 @@ const Feed = () => {
 
     const closeUpdate = () => setUpdateInfo(false)
 
-    
 
     const navigate = useNavigate();
 
