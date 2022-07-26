@@ -31,7 +31,7 @@ const Credentials = (props) => {
                 .then(res => navigate('/feed'))
                 .catch(err => setErrors(err.response.data.errors)):
             updateProfile?
-                axios.put(`http://localhost:8000/api/user/update/${user}`, {firstName, lastName, animal, color, email, password})
+                axios.put(`http://localhost:8000/api/user/update/${user}`, {firstName, lastName, animal, color, email})
                     .then(res => callBack())
                     .catch(err => setErrors(err.response.data.errors))
                 :axios.post(`http://localhost:8000/api/user/register`, {firstName, lastName, animal, color, email, password, confirmPassword}, {withCredentials : true})
@@ -88,11 +88,12 @@ const Credentials = (props) => {
                         <input type="text" id='email' name='email' className='form-control' onChange={(e) => setEmail(e.target.value)} value={email}/>
                         {errors.hasOwnProperty("email")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.email.message}</p>}
                     </div>
-                    <div className='col-12'>
+                    {updateProfile? ""
+                    :<div className='col-12'>
                         <label htmlFor="password" className='form-label'>Password: </label>
                         <input type="password" id='password' className='form-control' name='password' onChange={(e) => setPassword(e.target.value)} value={password}/>
                         {errors.hasOwnProperty("password")&&<p style={{color : "red", fontWeight : "bold"}}>{errors.password.message}</p>}
-                    </div>
+                    </div>}
                     {newOrUpdate === true?
                     <>
                         {updateProfile? ""

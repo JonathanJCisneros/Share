@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const {PostSchema} = require('./posts.model')
 const bcrypt = require('bcrypt');
 
 
@@ -38,7 +39,9 @@ const UserSchema = new mongoose.Schema({
         type : String,
         required : [true, "Password is required"],
         minlength : [8, "Password must be 8 characters or longer"]
-    }
+    },
+
+    posts : [PostSchema]
 }, {timestamps : true});
 
 UserSchema.virtual('confirmPassword')

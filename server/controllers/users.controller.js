@@ -5,9 +5,12 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
     getAll : (req, res) => {
-        User.find()
-            .then(users => res.json(users))
-            .catch(err => res.json(err))
+        User.find().populate('posts')
+            .exec((err, user) => {
+                err?
+                    res.status(400).json(err):
+                    res.json(user)
+            })
     },
 
 
