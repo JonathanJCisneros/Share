@@ -38,11 +38,9 @@ module.exports = {
                 user.posts.push(newPost)
                 user.confirmPassword = user.password
                 user.save()
-                .then(user => {
-                    res.json(user)
-                })
-                .catch(err => console.log(err))
+                .then(user => res.json(user))
+                .catch(err => res.status(400).json(err))
             })
-            .catch(err => res.json(err))
+            .catch(err => res.status(400).json(err))
     }
 }

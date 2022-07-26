@@ -18,4 +18,7 @@ const CommentSchema = new mongoose.Schema({
     likes : Number
 }, {timestamps : true});
 
-module.exports = mongoose.model('Comment', CommentSchema)
+module.exports = {
+    CommentModel : mongoose.model('Comment', CommentSchema),
+    CommentSchema
+}

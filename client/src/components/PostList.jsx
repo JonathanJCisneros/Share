@@ -6,18 +6,42 @@ const PostList = (props) => {
     const {user} = props;
     const [addPost, setAddPost] = useState(false)
     const [postList, setPostList] = useState([])
+    const [comment, setComment] = useState(false)
 
+    // New Post
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
 
+    // Add Comment
+    const [commentPost, setCommentPost] = useState("")
+    const [postId, setPostId] = useState("")
+
+    const [errors, setErrors] = useState({})
+
     useEffect(() => {
-        axios.get(`http://localhost:8000`)
-    })
+        axios.get(`http://localhost:8000/api/posts`)
+            .then(res => setPostList(res.data))
+            .catch(err => console.log(err))
+    }, [postList])
 
     const createPost = (e) => {
         e.preventDefault()
         axios.post(`http://localhost:8000/api/post`, {animal : user.animal, color: user.color, userId : user._id, title, content, likes : 0}, {withCredentials : true})
-            .then(res => setAddPost(false))
+            .then(res => setAddPost(false) + setTitle("") + setContent(""))
+            .catch(err => console.log(err.response))
+    }
+
+    const handleCommentSection = () => {
+        {comment?
+            setComment(false):
+            setComment(true)
+        }
+    }
+
+    const handleComment = (e) =>{
+        e.preventDefault()
+        axios.post(`http://localhost:8000/api/comment`, {animal : user.animal, color: user.color, postId, userId : user._id, comment : commentPost, likes : 0})
+            .then(res => setCommentPost("") + setPostId(""))
             .catch(err => console.log(err))
     }
 
@@ -30,22 +54,31 @@ const PostList = (props) => {
             <h1>Post List</h1>
             <br />
             <button className="btn btn-success" onClick={()=> setAddPost(true)}>New Post</button>
-            <div className="post">
+            {postList.map((post, i) =>{
+            return (<div className="post" key={i}>
                 <div className='postHeader'>
-                    <div className='postProfileImage'>
-                        <p>img</p>
+                    <div className='postProfileImage' style={{backgroundColor : post.color}}>
+                        <img src={`https://anonymous-animals.azurewebsites.net/animal/${post.animal}`} alt="Animal" />
                     </div>
-                    <h4>Anonymous User</h4>
+                    <h4>Anonymous {post.animal}</h4>
                 </div>
                 <div className='postContent'>
-                    <h4>Title</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim inventore modi expedita at aliquid minima exercitationem, pariatur accusamus! Non velit reiciendis ratione saepe a alias sit ipsam. Saepe, exercitationem. Odit?Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur debitis voluptatibus magnam quae numquam doloribus nostrum dolore expedita ducimus magni, omnis veritatis minima quo mollitia dolorem odio a natus inventore! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto laudantium, ex voluptates maiores illum ipsam. Facilis modi ipsam incidunt culpa architecto ducimus nisi adipisci reprehenderit quasi laudantium, quia, rerum labore.</p>
+                    <h4>{post.title}</h4>
+                    <p>{post.content}</p>
                 </div>
                 <div className='likes'>
-                    <button>Like</button><button>Comment</button>
+                    <button>Like</button><button onClick={handleCommentSection}>Comment</button>
                 </div>
-                <div>Comments/drop down to comment your own</div>
-            </div>
+                <div>
+                    {post.comments.map((comment, i) => {
+                        return (<h3 key={i}>{comment.comment}</h3>)
+                    })}
+                    <form onSubmit={handleComment}>
+                        <input type="text" name='comments' onChange={(e) => setCommentPost(e.target.value)} value={commentPost}/>
+                        <button type='submit' onClick={()=> setPostId(post._id)}>Comment</button>
+                    </form>
+                </div>
+            </div>)})}
             {addPost === true?
             <div className='newPost'>
                 <h4>New Post</h4>
@@ -53,14 +86,16 @@ const PostList = (props) => {
                     <label htmlFor="title">Title</label>
                     <br />
                     <input type="text" name='title' onChange={(e)=> setTitle(e.target.value)} value={title}/>
+                    {errors.hasOwnProperty("title")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.title.message}</p>}
                     <br />
                     <br />
                     <label htmlFor="content">Content</label>
                     <br />
                     <textarea type="text" name='content' onChange={(e) => setContent(e.target.value)} value={content} rows="4" cols="40"/>
+                    {errors.hasOwnProperty("content")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.content.message}</p>}
                     <br />
                     <br />
-                    <button onClick={()=> setAddPost(false)} className="btn btn-secondary">Nevermind</button>
+                    <button onClick={()=> setAddPost(false) + setTitle("") + setContent("")} className="btn btn-secondary">Nevermind</button>
                     <button type='submit' className='btn btn-success'>Post</button>
                 </form>
             </div>
