@@ -45,3 +45,15 @@
 .postContent p {
     margin-top: 10px;
 }
+
+.newPost {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #d2cdcb;
+    padding: 20px;
+}

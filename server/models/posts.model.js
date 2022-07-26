@@ -5,6 +5,8 @@ const PostSchema = new mongoose.Schema({
     animal : String,
     
     color : String,
+
+    userId : String,
     
     title : {
         type : String,

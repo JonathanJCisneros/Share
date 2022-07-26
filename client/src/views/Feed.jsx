@@ -9,13 +9,10 @@ const Feed = () => {
     const [user, setUser] = useState({})
     const [updateInfo, setUpdateInfo] = useState(false)
     const [deleteAttempt, setDeleteAttempt] = useState(false)
-    const [addPost, setAddPost] = useState(false)
 
     const closeUpdate = () => setUpdateInfo(false)
 
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
-    console.log(title,content)
+    
 
     const navigate = useNavigate();
 
@@ -37,12 +34,7 @@ const Feed = () => {
             .catch(err => console.log(err))
     }
 
-    const createPost = (e) => {
-        e.preventDefault()
-        axios.post(`http://localhost:8000/api/post`, {animal : user.animal, color: user.color, title, content, likes : 0}, {withCredentials : true})
-            .then(res => setAddPost(false))
-            .catch(err => console.log(err))
-    }
+    
 
     return (
         <div className='feedContainer'>
@@ -56,7 +48,7 @@ const Feed = () => {
                 <p>Link to Dashboard</p>
             </div>
             <div className="feed">
-                <PostList/>
+                <PostList user={user}/>
             </div>
             <div className="right">
                 <button onClick={logout} className='btn btn-danger'>Logout</button>
@@ -66,8 +58,6 @@ const Feed = () => {
                 <br />
                 <br />
                 <button className='btn btn-success' onClick={()=>setDeleteAttempt(true)}>Delete Account</button>
-                <br />
-                <button className="btn btn-success" onClick={()=>setAddPost(true)}>New Post</button>
             </div>
             {updateInfo? 
             <div className='updateProfile'>
@@ -83,25 +73,6 @@ const Feed = () => {
                 </div>
             </div>:""
             }
-            {addPost === true?
-            <div className='newPost'>
-                <h4>New Post</h4>
-                <form onSubmit={createPost}>
-                    <label htmlFor="title">Title</label>
-                    <br />
-                    <input type="text" name='title' onChange={(e)=> setTitle(e.target.value)} value={title}/>
-                    <br />
-                    <br />
-                    <label htmlFor="content">Content</label>
-                    <br />
-                    <textarea type="text" name='content' onChange={(e) => setContent(e.target.value)} value={content} rows="4" cols="40"/>
-                    <br />
-                    <br />
-                    <button onClick={()=> setAddPost(false)} className="btn btn-secondary">Nevermind</button>
-                    <button type='submit' className='btn btn-success'>Post</button>
-                </form>
-            </div>
-            :""}
         </div>
     )
 }
