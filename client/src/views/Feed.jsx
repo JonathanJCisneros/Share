@@ -19,7 +19,7 @@ const Feed = () => {
         axios.get(`http://localhost:8000/api/user/checkUser`, {withCredentials : true})
             .then(res => setUser({_id : res.data._id, firstName : res.data.firstName, lastName : res.data.lastName, animal : res.data.animal, color : res.data.color, email : res.data.email}))
             .catch(err => navigate('/', {state : {message : "You must log in to use this information"}}))
-    }, [user])
+    }, [])
 
     const logout = () => {
         axios.get(`http://localhost:8000/api/user/logout`, {withCredentials : true})

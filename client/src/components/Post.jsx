@@ -21,17 +21,6 @@ const Post = (props) => {
         }
     }
 
-    const handleCommentLikes = (commentId) => {
-        {commentLiked?
-            axios.put(`http://localhost:8000/api/comment/${commentId}`, {$inc : {likes : -1}})
-                .then(res => setCommentLiked(false))
-                .catch(err => console.log(err)):
-            axios.put(`http://localhost:8000/api/comment/${commentId}`, {$inc : {likes : 1}})
-                .then(res => setCommentLiked(true))
-                .catch(err => console.log(err))
-        }
-    }
-
     // Add Comment
     const [commentPost, setCommentPost] = useState("")
     const [postId, setPostId] = useState("")
@@ -76,7 +65,6 @@ const Post = (props) => {
                             <p > {comment.userId === user._id? "You" :"Anonymous " + comment.animal.charAt(0).toUpperCase() + comment.animal.slice(1)}</p>
                         </div>
                         <p className='comments'>{comment.comment}</p>
-                        <p id='commentLikes'>{comment.likes} Likes <span><button className="btn btn-link" style={{color : commentLiked? "darkgreen": "black", fontSize : "13px", marginBottom : "3px"}} onClick={()=> handleCommentLikes(comment._id)}>{commentLiked? "Liked":"Like"}</button></span></p>
                     </div>)
                 })}
             </div>

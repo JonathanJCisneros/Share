@@ -7,6 +7,25 @@ const PostList = (props) => {
     const {user} = props;
     const [addPost, setAddPost] = useState(false)
     const [postList, setPostList] = useState([])
+    const [motivationList, setMotivationList] = useState([])
+    console.log(motivationList)
+
+    const [quoteOfTheDay, setQuoteOfTheDay] = useState({})
+
+    console.log(quoteOfTheDay)
+
+    const createMotivation = () => {
+        axios.get(`https://type.fit/api/quotes`)
+            .then(res => setMotivationList(res.data))
+            .catch(err => console.log(err))
+        let random = Math.floor(Math.random() * motivationList.length)
+        setQuoteOfTheDay(motivationList[random])
+    }
+
+    const DailyQuote = () => {
+        let random = Math.floor(Math.random() * motivationList.length)
+        
+    }
     
 
     // New Post
@@ -21,7 +40,7 @@ const PostList = (props) => {
         axios.get(`http://localhost:8000/api/posts`)
             .then(res => setPostList(res.data))
             .catch(err => console.log(err))
-    }, [postList])
+    }, [])
 
     const createPost = (e) => {
         e.preventDefault()
@@ -34,8 +53,10 @@ const PostList = (props) => {
     return (
         <div>
             <div className='dailyPost'>
-                <h1>Post of the Day</h1>
+                {/* <h1>{quoteOfTheDay.author}</h1>
+                <h3>{quoteOfTheDay.text}</h3> */}
             </div>
+            <button onClick={createMotivation}>Start API</button><button onClick={DailyQuote}>Get Quote of the Day</button>
             <button className="btn btn-outline-primary" onClick={()=> setAddPost(true)} id='newPost'>Tell Us How You Are Feeling Today!</button>                
             {addPost === true?
             <div className='newPost'>

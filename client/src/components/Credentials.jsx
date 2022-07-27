@@ -84,13 +84,13 @@ const Credentials = (props) => {
                     :<h1 className='formTitle'>Login</h1>
                     }
                     <div className='col-12'>
-                        <label htmlFor="email" className='form-label'>Email: </label>
+                        <label htmlFor="email" className='form-label'>Email</label>
                         <input type="text" id='email' name='email' className='form-control' onChange={(e) => setEmail(e.target.value)} value={email}/>
                         {errors.hasOwnProperty("email")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.email.message}</p>}
                     </div>
                     {updateProfile? ""
                     :<div className='col-12'>
-                        <label htmlFor="password" className='form-label'>Password: </label>
+                        <label htmlFor="password" className='form-label'>Password</label>
                         <input type="password" id='password' className='form-control' name='password' onChange={(e) => setPassword(e.target.value)} value={password}/>
                         {errors.hasOwnProperty("password")&&<p style={{color : "red", fontWeight : "bold"}}>{errors.password.message}</p>}
                     </div>}
@@ -98,7 +98,7 @@ const Credentials = (props) => {
                     <>
                         {updateProfile? ""
                         :<div>                            
-                            <label htmlFor="confirmPassword" className='form-label'>Confirm Password: </label>
+                            <label htmlFor="confirmPassword" className='form-label'>Confirm Password</label>
                             <input type="password" className='form-control' name='confirmPassword' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword}/>
                             {errors.hasOwnProperty("confirmPassword")&&<p style={{color : "red", fontWeight : "bold"}}>{errors.confirmPassword.message}</p>}
                         </div>}
