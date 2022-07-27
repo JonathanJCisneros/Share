@@ -36,42 +36,44 @@ const Feed = () => {
     
 
     return (
-        <div className='feedContainer'>
-            <div className="left">
-                <div className='profileImage' style={{backgroundColor : user.color}}>
-                    <img src={`https://anonymous-animals.azurewebsites.net/animal/${user.animal}`} alt="Animal" />
+        <div>
+            <div className="nav">
+                <h1>Share.</h1>
+            </div>
+            <div className='feedContainer'>
+                <div className="left">
+                    <div className='profileImage' style={{backgroundColor : user.color}}>
+                        <img src={`https://anonymous-animals.azurewebsites.net/animal/${user.animal}`} alt="Animal" />
+                    </div>
+                    <h4 className='userName'>{user.firstName} {user.lastName}</h4>
                 </div>
-                <h3>{user.firstName} {user.lastName}</h3>
-                <p>You're ID is: {user._id}</p>
-                <br />
-                <p>Link to Dashboard</p>
-            </div>
-            <div className="feed">
-                <PostList user={user}/>
-            </div>
-            <div className="right">
-                <button onClick={logout} className='btn btn-danger'>Logout</button>
-                <br />
-                <br />
-                <button className='btn btn-secondary' onClick={()=> setUpdateInfo(true)}>Update Profile</button>
-                <br />
-                <br />
-                <button className='btn btn-success' onClick={()=>setDeleteAttempt(true)}>Delete Account</button>
-            </div>
-            {updateInfo? 
-            <div className='updateProfile'>
-                <Credentials user={user._id} initialFirstName={user.firstName} initialLastName={user.lastName} initialAnimal={user.animal} initialColor={user.color} initialEmail={user.email} initialType={true} initialProfile={true} callBack={closeUpdate}/>
-            </div>: ""
-            }
-            {deleteAttempt?
-            <div className='deleteAttempt'>
-                <h3>Are you sure?</h3>
-                <div className='choices'>
-                    <button className='btn btn-danger' onClick={deleteAccount}>Delete Account</button>
-                    <button className='btn btn-success' onClick={()=> setDeleteAttempt(false)}>Nevermind</button>
+                <div className="feed">
+                    <PostList user={user}/>
                 </div>
-            </div>:""
-            }
+                <div className="right">
+                    <button onClick={logout} className='btn btn-danger'>Logout</button>
+                    <br />
+                    <br />
+                    <button className='btn btn-secondary' onClick={()=> setUpdateInfo(true)}>Update Profile</button>
+                    <br />
+                    <br />
+                    <button className='btn btn-success' onClick={()=>setDeleteAttempt(true)}>Delete Account</button>
+                </div>
+                {updateInfo? 
+                <div className='updateProfile'>
+                    <Credentials user={user._id} initialFirstName={user.firstName} initialLastName={user.lastName} initialAnimal={user.animal} initialColor={user.color} initialEmail={user.email} initialType={true} initialProfile={true} callBack={closeUpdate}/>
+                </div>: ""
+                }
+                {deleteAttempt?
+                <div className='deleteAttempt'>
+                    <h3>Are you sure?</h3>
+                    <div className='choices'>
+                        <button className='btn btn-danger' onClick={deleteAccount}>Delete Account</button>
+                        <button className='btn btn-success' onClick={()=> setDeleteAttempt(false)}>Nevermind</button>
+                    </div>
+                </div>:""
+                }
+            </div>
         </div>
     )
 }

@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+
 * {
     margin: 0px auto;
     padding: 0px;
 }
+
+.nav {
+    background-color: #A2BCE0;
+}
+
+.nav h1 {
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: white;
+}
+
 .feedContainer {
     display: flex;
     width: 100%;
@@ -9,22 +21,33 @@
     padding-left: 20px;
     padding-right: 20px;
     justify-content: space-between;
+    background-color: rgb(237, 237, 237);
 }
 
 .left {
     width: 20%;
-    height: 450px;
+    height: 250px;
     margin: 30px 10px 30px 30px;
-    border: 2px solid black;
+    box-shadow: 0px 0px 7px rgb(65, 65, 65);
     border-radius: 10px;
+    background-color: #A2BCE0;
+}
+
+.userName {
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: white;
 }
 
 .profileImage {
     height: 75px;
     width: 75px;
-    border: 2px solid black;
-    border-radius: 45px;
+    box-shadow: 0px 0px 5px rgb(75, 75, 75);
+    border-radius: 50%;
     margin: 50px auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
 }
 
 .profileImage img {
@@ -42,8 +65,9 @@
     height: 250px;
     margin: 30px 30px 30px 10px;
     padding-top: 30px;
-    border: 2px solid black;
+    box-shadow: 0px 0px 7px rgb(65, 65, 65);
     border-radius: 10px;
+    background-color: #A2BCE0;
 }
 
 .updateProfile {

@@ -51,12 +51,12 @@ const Credentials = (props) => {
                         }
                         <div className='row'>
                             <div className='col'>
-                                <label htmlFor="firstName" className='form-label'>First Name: </label>
+                                <label htmlFor="firstName" className='form-label'>First Name</label>
                                 <input type="text" className='form-control' name='firstName' onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
                                 {errors.hasOwnProperty("firstName")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.firstName.message}</p>}
                             </div>
                             <div className='col'>
-                                <label htmlFor="lastName" className='form-label'>Last Name: </label>
+                                <label htmlFor="lastName" className='form-label'>Last Name</label>
                                 <input type="text" className='form-control' name='lastName' onChange={(e) => setLastName(e.target.value)} value={lastName}/>
                                 {errors.hasOwnProperty("lastName")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.lastName.message}</p>}
                             </div>
@@ -77,7 +77,7 @@ const Credentials = (props) => {
                                 {errors.hasOwnProperty("color")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.color.message}</p>}
                             </div>
                             <div className='registerProfileImage' style={{backgroundColor : color === ""? "lightgray": color}}>
-                                <img src={`https://anonymous-animals.azurewebsites.net/animal/${animal}`} alt="Animal" />
+                                <img src={`https://anonymous-animals.azurewebsites.net/animal/${animal}`} alt="Select Animal" />
                             </div>
                         </div>
                     </>

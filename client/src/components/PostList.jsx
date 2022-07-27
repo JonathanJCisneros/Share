@@ -51,52 +51,61 @@ const PostList = (props) => {
             <div className='dailyPost'>
                 <h1>Post of the Day</h1>
             </div>
-            <h1>Post List</h1>
-            <br />
-            <button className="btn btn-success" onClick={()=> setAddPost(true)}>New Post</button>
+            <button className="btn btn-outline-primary" onClick={()=> setAddPost(true)} id='newPost'>Tell Us How You Are Feeling Today!</button>
             {postList.map((post, i) =>{
-            return (<div className="post" key={i}>
+            return (<div className="post" key={i} style={{backgroundColor : post.userId === user._id?"#A2BCE0":"#FAFFFD"}}>
                 <div className='postHeader'>
-                    <div className='postProfileImage' style={{backgroundColor : post.color}}>
-                        <img src={`https://anonymous-animals.azurewebsites.net/animal/${post.animal}`} alt="Animal" />
+                    <div className='postProfileImage' style={{backgroundColor : post.userId === user._id? user.color:post.color}}>
+                        <img src={`https://anonymous-animals.azurewebsites.net/animal/${post.userId === user._id? user.animal:post.animal}`} alt="Animal" />
                     </div>
-                    <h4>Anonymous {post.animal}</h4>
+                    <h4 style={{color : post.userId === user._id? "white": "black"}}>{post.userId === user._id? "You": "Anonymous " + post.animal.charAt(0).toUpperCase() + post.animal.slice(1)}</h4>
                 </div>
                 <div className='postContent'>
                     <h4>{post.title}</h4>
                     <p>{post.content}</p>
                 </div>
                 <div className='likes'>
-                    <button>Like</button><button onClick={handleCommentSection}>Comment</button>
+                    <span style={{marginRight : "25px"}}>{post.likes} Likes</span><button class="btn btn-outline-primary" id='likes'>Like</button><button onClick={handleCommentSection} id='comment' className='btn btn-outline-dark'>Comment</button>
                 </div>
-                <div>
+                <div className='commentSection'>
                     {post.comments.map((comment, i) => {
-                        return (<h3 key={i}>{comment.comment}</h3>)
+                        return (<div key={i} className='commentBubble' style={{backgroundColor : comment.userId === user._id? "#1982FC": "lightgray", marginRight : comment.userId === user._id? "0px": "auto", marginLeft : comment.userId === user._id? "auto" :"0px"}}>
+                            <div className='commentHeader'>
+                                <div className='commentImage' style={{backgroundColor : comment.userId === user._id? user.color:comment.color}}>
+                                    <img src={`https://anonymous-animals.azurewebsites.net/animal/${comment.userId === user._id? user.animal:comment.animal}`} alt="Animal"/>
+                                </div>
+                                <p > {comment.userId === user._id? "You" :"Anonymous " + comment.animal.charAt(0).toUpperCase() + comment.animal.slice(1)}</p>
+                            </div>
+                            <p className='comments'>{comment.comment}</p>
+                        </div>)
                     })}
+                </div>
+                {comment?
+                <div>
                     <form onSubmit={handleComment}>
                         <input type="text" name='comments' onChange={(e) => setCommentPost(e.target.value)} value={commentPost}/>
                         <button type='submit' onClick={()=> setPostId(post._id)}>Comment</button>
                     </form>
-                </div>
+                </div>:""}
             </div>)})}
             {addPost === true?
             <div className='newPost'>
                 <h4>New Post</h4>
                 <form onSubmit={createPost}>
-                    <label htmlFor="title">Title</label>
+                    <label htmlFor="title" className='form-label'>Title</label>
                     <br />
-                    <input type="text" name='title' onChange={(e)=> setTitle(e.target.value)} value={title}/>
+                    <input type="text" name='title' className="form-control" onChange={(e)=> setTitle(e.target.value)} value={title}/>
                     {errors.hasOwnProperty("title")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.title.message}</p>}
+                    <label htmlFor="content" className='form-label'>Content</label>
                     <br />
-                    <br />
-                    <label htmlFor="content">Content</label>
-                    <br />
-                    <textarea type="text" name='content' onChange={(e) => setContent(e.target.value)} value={content} rows="4" cols="40"/>
+                    <textarea type="text" name='content' className="form-control" onChange={(e) => setContent(e.target.value)} value={content} rows="4" cols="40"/>
                     {errors.hasOwnProperty("content")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.content.message}</p>}
                     <br />
-                    <br />
-                    <button onClick={()=> setAddPost(false) + setTitle("") + setContent("")} className="btn btn-secondary">Nevermind</button>
-                    <button type='submit' className='btn btn-success'>Post</button>
+                    <div className='footer'>
+                        <button onClick={()=> setAddPost(false) + setTitle("") + setContent("")} className="btn btn-outline-secondary">Nevermind</button>
+                        <button type='submit' className='btn btn-outline-success'>Post</button>
+                    </div>
+                    
                 </form>
             </div>
             :""}
