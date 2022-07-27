@@ -16,7 +16,7 @@ const PostSchema = new mongoose.Schema({
 
     content : {
         type : String,
-        requried : [true, "Content is required"],
+        required : [true, "Content is required"],
         minlength : [5, "Content must be at least 5 characters long"]
     },
 

@@ -28,9 +28,14 @@ module.exports = {
     },
 
     newPost : async(req, res) => {
-        const newPost = new PostModel(req.body)
-        await newPost.save()
-        await User.findOneAndUpdate({_id : newPost.userId}, {$push: {posts : newPost}})
-        res.json(newPost)
+        
+        try{
+            const newPost = new PostModel(req.body)
+            await newPost.save()
+            await User.findOneAndUpdate({_id : newPost.userId}, {$push : {posts : newPost}})
+            res.json(newPost)
+        }catch(err){
+            res.status(400).json(err)
+        }
     }
 }

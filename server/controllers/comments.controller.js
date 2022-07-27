@@ -30,16 +30,13 @@ module.exports = {
     
     newComment : async(req, res) => {
 
-        const newComment = new CommentModel(req.body)
-        await newComment.save()
-
-        await PostModel.findOne({_id : newComment.postId})
-            .then(post => {
-                post.comments.push(newComment)
-                post.save()
-                .then(post => res.json(post))
-                .catch(err => res.status(400).json(err))
-            })
-            .catch(err => res.status(400).json(err))
+        try{
+            const newComment = new CommentModel(req.body)
+            await newComment.save()
+            await PostModel.findOneAndUpdate({_id : newComment.postId}, {$push : {comments : newComment}})
+            res.json(newComment)
+        }catch(err){
+            res.status(400).json(err)
+        }
     }
 }
