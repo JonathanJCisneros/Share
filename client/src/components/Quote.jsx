@@ -1,0 +1,18 @@
+import React, {useState} from 'react'
+import '../static/Quote.css'
+
+const Quote = (props) => {
+    const {quote} = props;
+    
+    return (
+        <div className='quote' style={{backgroundImage : "url(https://picsum.photos/580/350)"}} >
+            {quote&&
+            <div style={{marginTop : "10px"}}>
+                <h3 id='quote'>"{quote.text}"</h3>
+                <h2 id='author'>-{quote.author === null? "Anonymous": quote.author}</h2>
+            </div>}
+        </div>
+    )
+}
+
+export default Quote

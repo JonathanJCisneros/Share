@@ -1,14 +1,22 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 import axios from 'axios';
-import '../static/Post.css'
+import '../static/Post.css';
+import Quote from './Quote';
+import { useEffect } from 'react';
 
 const Post = (props) => {
     const {user, post} = props;
+    const [postInfo, setPostInfo] = useState(post)
     const [comment, setComment] = useState(false);
     const [liked, setLiked] = useState(false);
-    const [commentLiked, setCommentLiked] = useState(false)
 
     const [errors, setErrors] = useState({})
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/post/${post._id}`)
+            .then(res => setPostInfo(res.data))
+            .catch(err => console.log(err))
+    },[postInfo])
 
     const handlePostLikes = (postId) => {
         {liked?
@@ -40,23 +48,23 @@ const Post = (props) => {
     }
 
     return (
-        <div className="post" style={{backgroundColor : post.userId === user._id?"#A2BCE0":"#FAFFFD"}}>
+        <div className="post" style={{backgroundColor : postInfo.userId === user._id?"#A2BCE0":"#FAFFFD"}}>
             <div className='postHeader'>
-                <div className='postProfileImage' style={{backgroundColor : post.userId === user._id? user.color:post.color}}>
-                    <img src={`https://anonymous-animals.azurewebsites.net/animal/${post.userId === user._id? user.animal:post.animal}`} alt="Animal" />
+                <div className='postProfileImage' style={{backgroundColor : postInfo.userId === user._id? user.color:postInfo.color}}>
+                    <img src={`https://anonymous-animals.azurewebsites.net/animal/${postInfo.userId === user._id? user.animal:postInfo.animal}`} alt="Animal" />
                 </div>
-                <h4 style={{color : post.userId === user._id? "white": "black"}}>{post.userId === user._id? "You": "Anonymous " + post.animal.charAt(0).toUpperCase() + post.animal.slice(1)}</h4>
+                <h4 style={{color : postInfo.userId === user._id? "white": "black"}}>{postInfo.userId === user._id? "You": "Anonymous " + postInfo.animal.charAt(0).toUpperCase() + postInfo.animal.slice(1)}</h4>
             </div>
             <div className='postContent'>
-                <h4>{post.title}</h4>
-                <p>{post.content}</p>
+                <h4>{postInfo.title}</h4>
+                <p>{postInfo.content}</p>
             </div>
             <div className='likes'>
-                <span style={{marginRight : "25px"}}>{post.likes} Likes</span><button onClick={()=>handlePostLikes(post._id)} className={liked? "btn btn-outline-success": " btn btn-outline-primary"} id='likes'>{liked? "Liked": "Like"}</button>
+                <span style={{marginRight : "25px"}}>{postInfo.likes} Likes</span><button onClick={()=>handlePostLikes(postInfo._id)} className={liked? "btn btn-outline-success": "btn btn-outline-primary"} id='likes'>{liked? "Liked": "Like"}</button>
                 <button onClick={handleCommentSection} id='comment' className='btn btn-outline-dark'>Comment</button>
             </div>
             <div className='commentSection'>
-                {post.comments.map((comment, i) => {
+                {postInfo.comments.map((comment, i) => {
                     return (<div key={i} className='commentBubble' style={{backgroundColor : comment.userId === user._id? "#1982FC": "lightgray", marginRight : comment.userId === user._id? "0px": "auto", marginLeft : comment.userId === user._id? "auto" :"0px"}}>
                         <div className='commentHeader'>
                             <div className='commentImage' style={{backgroundColor : comment.userId === user._id? user.color:comment.color}}>

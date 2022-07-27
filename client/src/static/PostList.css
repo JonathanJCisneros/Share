@@ -1,10 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 .dailyPost {
-    border: 2px solid black;
+    box-shadow: 0px 0px 5px rgb(75, 75, 75);
     border-radius: 10px;
     height: 250px;
     margin: 30px 0px;
+    padding: 20px;
+}
+
+#quote {
+    font-family: 'Paytone One', sans-serif;
+    color: white;
+}
+
+#author {
+    text-align: left;
+    margin-left: 20px;
+    color: white;
+    font-family: 'Paytone One', sans-serif;
 }
 
 #newPost {

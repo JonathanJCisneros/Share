@@ -2,37 +2,37 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import '../static/PostList.css';
 import Post from './Post';
+import Quote from './Quote';
 
 const PostList = (props) => {
     const {user} = props;
     const [addPost, setAddPost] = useState(false)
     const [postList, setPostList] = useState([])
     const [motivationList, setMotivationList] = useState([])
-    console.log(motivationList)
 
     const [quoteOfTheDay, setQuoteOfTheDay] = useState({})
 
-    console.log(quoteOfTheDay)
 
-    const createMotivation = () => {
+    useEffect(() => {
         axios.get(`https://type.fit/api/quotes`)
-            .then(res => setMotivationList(res.data))
+            .then(res => setMotivationList(res.data) + handleQuoteOfDay(res.data))
             .catch(err => console.log(err))
-        let random = Math.floor(Math.random() * motivationList.length)
-        setQuoteOfTheDay(motivationList[random])
-    }
+    }, [])
 
-    const DailyQuote = () => {
-        let random = Math.floor(Math.random() * motivationList.length)
-        
+    const handleQuoteOfDay = (data) => {
+        let random = Math.floor(Math.random() * data.length)
+        setQuoteOfTheDay(data[random])
+        // setInterval(handleQuote, 1000 * 60 * 60 * 24)
     }
-    
 
     // New Post
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
 
-    
+    const randomQuote = () => {
+        let random = Math.floor(Math.random() * motivationList.length)
+        return motivationList[random]
+    }
 
     const [errors, setErrors] = useState({})
 
@@ -52,11 +52,14 @@ const PostList = (props) => {
 
     return (
         <div>
-            <div className='dailyPost'>
-                {/* <h1>{quoteOfTheDay.author}</h1>
-                <h3>{quoteOfTheDay.text}</h3> */}
+            <div className='dailyPost' style={{backgroundImage : "url(https://picsum.photos/580/250)"}}>
+                {quoteOfTheDay&&
+                <div style={{marginTop : "10px"}}>
+                    <h3 id='quote'>"{quoteOfTheDay.text}"</h3>
+                    <h2 id='author'>-{quoteOfTheDay.author === null? "Anonymous": quoteOfTheDay.author}</h2>
+                </div>
+                }
             </div>
-            <button onClick={createMotivation}>Start API</button><button onClick={DailyQuote}>Get Quote of the Day</button>
             <button className="btn btn-outline-primary" onClick={()=> setAddPost(true)} id='newPost'>Tell Us How You Are Feeling Today!</button>                
             {addPost === true?
             <div className='newPost'>
@@ -79,11 +82,15 @@ const PostList = (props) => {
                 </form>
             </div>
             :""}
+            
             {postList.map((post, i) => {
                 return (<div key={i}>
-                    <Post post={post} user={user}/>
+                    <Post post={post} user={user} />
+                    {i % 4 === 0&&
+                    <Quote quote={randomQuote()}/>}
                 </div>)
             })}
+            
         </div>
     )
 }
