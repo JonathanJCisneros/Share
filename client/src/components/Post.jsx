@@ -4,11 +4,33 @@ import '../static/Post.css'
 
 const Post = (props) => {
     const {user, post} = props;
-    const [comment, setComment] = useState(false)
+    const [comment, setComment] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [commentLiked, setCommentLiked] = useState(false)
 
     const [errors, setErrors] = useState({})
 
-    console.log(errors)
+    const handlePostLikes = (postId) => {
+        {liked?
+            axios.put(`http://localhost:8000/api/post/${postId}`, {$inc : {likes : -1}})
+                .then(res => setLiked(false))
+                .catch(err => console.log(err)):
+            axios.put(`http://localhost:8000/api/post/${postId}`, {$inc : {likes : 1}})
+                .then(res => setLiked(true))
+                .catch(err => console.log(err))
+        }
+    }
+
+    const handleCommentLikes = (commentId) => {
+        {commentLiked?
+            axios.put(`http://localhost:8000/api/comment/${commentId}`, {$inc : {likes : -1}})
+                .then(res => setCommentLiked(false))
+                .catch(err => console.log(err)):
+            axios.put(`http://localhost:8000/api/comment/${commentId}`, {$inc : {likes : 1}})
+                .then(res => setCommentLiked(true))
+                .catch(err => console.log(err))
+        }
+    }
 
     // Add Comment
     const [commentPost, setCommentPost] = useState("")
@@ -41,7 +63,7 @@ const Post = (props) => {
                 <p>{post.content}</p>
             </div>
             <div className='likes'>
-                <span style={{marginRight : "25px"}}>{post.likes} Likes</span><button className="btn btn-outline-primary" id='likes'>Like</button>
+                <span style={{marginRight : "25px"}}>{post.likes} Likes</span><button onClick={()=>handlePostLikes(post._id)} className={liked? "btn btn-outline-success": " btn btn-outline-primary"} id='likes'>{liked? "Liked": "Like"}</button>
                 <button onClick={handleCommentSection} id='comment' className='btn btn-outline-dark'>Comment</button>
             </div>
             <div className='commentSection'>
@@ -54,14 +76,15 @@ const Post = (props) => {
                             <p > {comment.userId === user._id? "You" :"Anonymous " + comment.animal.charAt(0).toUpperCase() + comment.animal.slice(1)}</p>
                         </div>
                         <p className='comments'>{comment.comment}</p>
+                        <p id='commentLikes'>{comment.likes} Likes <span><button className="btn btn-link" style={{color : commentLiked? "darkgreen": "black", fontSize : "13px", marginBottom : "3px"}} onClick={()=> handleCommentLikes(comment._id)}>{commentLiked? "Liked":"Like"}</button></span></p>
                     </div>)
                 })}
             </div>
             {comment?
             <div>
                 <form onSubmit={handleComment}>
-                    <input type="text" name='comments' onChange={(e) => setCommentPost(e.target.value)} value={commentPost}/>
-                    <button type='submit' onClick={()=> setPostId(post._id)}>Comment</button>
+                    <input type="text" className='form-control' name='comments' onChange={(e) => setCommentPost(e.target.value)} value={commentPost} placeholder="Add your comment here!"/>
+                    <button type='submit' onClick={()=> setPostId(post._id)} className='btn btn-outline-success' style={{marginTop : "10px"}}>Comment</button>
                     {errors.hasOwnProperty("comment")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.comment.message}</p>}
                 </form>
             </div>:""}

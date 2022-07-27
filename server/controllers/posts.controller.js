@@ -16,7 +16,7 @@ module.exports = {
     },
 
     updatePost : (req, res) => {
-        PostModel.findOneAndUpdate(req.params, req.body, {new : true, runValidators : true})
+        PostModel.findOneAndUpdate(req.params, req.body, {new : true})
             .then(update => res.json(update))
             .catch(err => res.status(400).json(err))
     },

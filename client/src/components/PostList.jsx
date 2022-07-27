@@ -21,7 +21,7 @@ const PostList = (props) => {
         axios.get(`http://localhost:8000/api/posts`)
             .then(res => setPostList(res.data))
             .catch(err => console.log(err))
-    }, [])
+    }, [postList])
 
     const createPost = (e) => {
         e.preventDefault()

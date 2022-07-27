@@ -17,15 +17,15 @@ module.exports = {
 
     
     updateComment : (req, res) => {
-        CommentModel.findOneAndUpdate(req.params, req.body, {new : true, runValidators : true})
-        .then(update => res.json(update))
-        .catch(err => res.status(400).json(err))
+        CommentModel.findOneAndUpdate(req.params, req.body, {new : true})
+            .then(update => res.json(update))
+            .catch(err => res.status(400).json(err))
     },
     
     deleteComment : (req, res) => {
         CommentModel.deleteOne(req.params)
-        .then(deleteConfirm => res.json(deleteConfirm))
-        .catch(err => res.json(err))
+            .then(deleteConfirm => res.json(deleteConfirm))
+            .catch(err => res.json(err))
     },
     
     newComment : async(req, res) => {
