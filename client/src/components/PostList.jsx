@@ -33,7 +33,6 @@ const PostList = (props) => {
 
     return (
         <div>
-            <Chat/>
             <Quote/>
             <button className="btn btn-outline-primary" onClick={()=> setAddPost(true)} id='newPost'>Tell Us How You Are Feeling Today!</button>                
             {addPost === true?

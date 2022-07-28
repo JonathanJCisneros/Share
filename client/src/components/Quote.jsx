@@ -5,7 +5,6 @@ import '../static/Quote.css'
 const Quote = () => {
     const [quote, setQuote] = useState({})
     const [image, setImage] = useState()
-    console.log(image)
 
     useEffect(() => {
         axios.get(`https://type.fit/api/quotes`)

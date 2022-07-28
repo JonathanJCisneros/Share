@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {PostSchema} = require('./posts.model')
+const {PostSchema} = require('./posts.model');
 const bcrypt = require('bcrypt');
 
 

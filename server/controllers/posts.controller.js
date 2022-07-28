@@ -1,5 +1,4 @@
 const {PostModel} = require('../models/posts.model');
-const jwt = require('jsonwebtoken');
 const User = require('../models/users.model');
 
 module.exports = {

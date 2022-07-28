@@ -43,9 +43,9 @@ const Post = (props) => {
     const handleComment = (e) =>{
         e.preventDefault()
         axios.post(`http://localhost:8000/api/comment`, {animal : user.animal, color: user.color, postId, userId : user._id, comment : commentPost, likes : 0})
-            .then(res => setCommentPost("") + setPostId(""))
+            .then(res => setCommentPost("") + setPostId("") + setRefresh(!refresh))
             .catch(err => setErrors(err.response.data.errors))
-    }
+    } 
 
     return (
         <div className="post" style={{backgroundColor : postInfo.userId === user._id?"#A2BCE0":"#FAFFFD"}}>

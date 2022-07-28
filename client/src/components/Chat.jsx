@@ -9,6 +9,13 @@ const Chat = () => {
         return () => socket.disconnect(true);
     }, []);
 
+    socket.on = () => {
+        console.log("Welcome to chat!")
+    }
+
+    socket.on('message', message => {
+        console.log(message);
+    })
 
     return (
         <div>
