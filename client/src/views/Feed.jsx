@@ -35,24 +35,27 @@ const Feed = () => {
             .catch(err => console.log(err))
     }
 
-    const mybutton = document.getElementById("myBtn");
 
-    window.onscroll = function() {scrollFunction()};
-    
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
+    const [visible, setVisible] = useState(false)
+
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > 300){
+            setVisible(true)
         } 
-        else {
-        mybutton.style.display = "none";
+        else if (scrolled <= 300){
+            setVisible(false)
         }
-    }
-    
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
+    };
 
+    const scrollToTop = () =>{
+        window.scrollTo({
+            top: 0, 
+            behavior: 'smooth'
+        });
+    };
+
+    window.addEventListener('scroll', toggleVisible);
 
     return (
         <body>
@@ -62,22 +65,41 @@ const Feed = () => {
                 </div>
                 <div className='feedContainer'>
                     <div className="left">
-                        <div className='profileImage' style={{backgroundColor : user.color}}>
-                            <img src={`https://anonymous-animals.azurewebsites.net/animal/${user.animal}`} alt="Animal" />
+                        <div id="ltop">
+                            <div className='profileImage' style={{backgroundColor : user.color}}>
+                                <img src={`https://anonymous-animals.azurewebsites.net/animal/${user.animal}`} alt="Animal" />
+                            </div>
+                            <h4 className='userName'>{user.firstName} {user.lastName}</h4>
+                            <br />
+                            <button className='btn btn-outline-secondary' onClick={()=> setUpdateInfo(true)}>Update Profile</button>
                         </div>
-                        <h4 className='userName'>{user.firstName} {user.lastName}</h4>
+                        <div id="lbottom">
+                            <button className='btn btn-outline-success'>Chat</button>
+                        </div>
                     </div>
                     <div className="feed">
                         <PostList user={user}/>
                     </div>
                     <div className="right">
-                        <button onClick={logout} className='btn btn-danger'>Logout</button>
-                        <br />
-                        <br />
-                        <button className='btn btn-secondary' onClick={()=> setUpdateInfo(true)}>Update Profile</button>
-                        <br />
-                        <br />
-                        <button className='btn btn-success' onClick={()=>setDeleteAttempt(true)}>Delete Account</button>
+                        <div id="rtop">
+                            <button onClick={logout} className='btn btn-outline-danger'>Logout</button>
+                            <br />
+                            <br />
+                            <button className='btn btn-outline-success' onClick={()=>setDeleteAttempt(true)}>Delete Account</button>
+                        </div>
+                        <div id="rbottom">
+                            <h4>Resource Links</h4>
+                            <a href="tel:988">Suicide and Crisis Lifeline</a>
+                            <br />
+                            <a href="https://medium.com/mental-health-league/7-inspiring-stories-on-mental-health-you-should-read-bb5bf1552e95" target="_blank">7 Inspiring Stories</a>
+                            <br />
+                            <a href="https://www.verywellmind.com/what-is-mental-health-2330755" target="_blank">What is Mental Health?</a>
+                            <br />
+                            <a href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/five-steps-to-mental-wellbeing/" target="_blank">The Do's and Don'ts</a>
+                            <br />
+                            <a href="https://www.mentalhealth.gov/">Mental Health Gov</a>
+                        </div>
+                        
                     </div>
                     {updateInfo? 
                     <div className='updateProfile'>
@@ -88,13 +110,13 @@ const Feed = () => {
                     <div className='deleteAttempt'>
                         <h3>Are you sure?</h3>
                         <div className='choices'>
-                            <button className='btn btn-danger' onClick={deleteAccount}>Delete Account</button>
-                            <button className='btn btn-success' onClick={()=> setDeleteAttempt(false)}>Nevermind</button>
+                            <button className='btn btn-outline-danger' onClick={deleteAccount}>Delete Account</button>
+                            <button className='btn btn-outline-success' onClick={()=> setDeleteAttempt(false)}>Nevermind</button>
                         </div>
                     </div>:""
                     }
                 </div>
-                <button onClick={topFunction()} id="myBtn" title="Go to top">Top</button>
+                <button onClick={scrollToTop} id="myBtn" style={{display : visible? "inline": "none"}}>Top</button>
             </div>
         </body>
     )

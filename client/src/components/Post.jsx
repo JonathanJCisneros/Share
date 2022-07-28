@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import '../static/Post.css';
-import Quote from './Quote';
 import { useEffect } from 'react';
 
 const Post = (props) => {
@@ -9,6 +8,7 @@ const Post = (props) => {
     const [postInfo, setPostInfo] = useState(post)
     const [comment, setComment] = useState(false);
     const [liked, setLiked] = useState(false);
+    const [refresh, setRefresh] = useState(false)
 
     const [errors, setErrors] = useState({})
 
@@ -16,15 +16,15 @@ const Post = (props) => {
         axios.get(`http://localhost:8000/api/post/${post._id}`)
             .then(res => setPostInfo(res.data))
             .catch(err => console.log(err))
-    },[postInfo])
+    },[refresh])
 
     const handlePostLikes = (postId) => {
         {liked?
             axios.put(`http://localhost:8000/api/post/${postId}`, {$inc : {likes : -1}})
-                .then(res => setLiked(false))
+                .then(res => setLiked(false) + setRefresh(!refresh))
                 .catch(err => console.log(err)):
             axios.put(`http://localhost:8000/api/post/${postId}`, {$inc : {likes : 1}})
-                .then(res => setLiked(true))
+                .then(res => setLiked(true) + setRefresh(!refresh))
                 .catch(err => console.log(err))
         }
     }
