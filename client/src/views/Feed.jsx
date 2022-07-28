@@ -10,7 +10,9 @@ const Feed = () => {
     const [updateInfo, setUpdateInfo] = useState(false)
     const [deleteAttempt, setDeleteAttempt] = useState(false)
 
-    const closeUpdate = () => setUpdateInfo(false)
+    const [refresh, setRefresh] = useState(true)
+
+    const closeUpdate = () => setUpdateInfo(false) + setRefresh(!refresh)
 
 
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ const Feed = () => {
         axios.get(`http://localhost:8000/api/user/checkUser`, {withCredentials : true})
             .then(res => setUser({_id : res.data._id, firstName : res.data.firstName, lastName : res.data.lastName, animal : res.data.animal, color : res.data.color, email : res.data.email}))
             .catch(err => navigate('/', {state : {message : "You must log in to use this information"}}))
-    }, [])
+    }, [refresh])
 
     const logout = () => {
         axios.get(`http://localhost:8000/api/user/logout`, {withCredentials : true})
