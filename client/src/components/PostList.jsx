@@ -3,6 +3,7 @@ import axios from 'axios'
 import '../static/PostList.css';
 import Post from './Post';
 import Quote from './Quote';
+import Chat from './Chat';
 
 const PostList = (props) => {
     const {user} = props;
@@ -32,6 +33,7 @@ const PostList = (props) => {
 
     return (
         <div>
+            <Chat/>
             <Quote/>
             <button className="btn btn-outline-primary" onClick={()=> setAddPost(true)} id='newPost'>Tell Us How You Are Feeling Today!</button>                
             {addPost === true?

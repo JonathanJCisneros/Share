@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import '../static/Feed.css';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +22,7 @@ const Feed = () => {
         axios.get(`http://localhost:8000/api/user/checkUser`, {withCredentials : true})
             .then(res => setUser({_id : res.data._id, firstName : res.data.firstName, lastName : res.data.lastName, animal : res.data.animal, color : res.data.color, email : res.data.email}))
             .catch(err => navigate('/', {state : {message : "You must log in to use this information"}}))
-    }, [refresh])
+    }, [refresh, navigate])
 
     const logout = () => {
         axios.get(`http://localhost:8000/api/user/logout`, {withCredentials : true})
@@ -91,13 +92,13 @@ const Feed = () => {
                             <h4>Resource Links</h4>
                             <a href="tel:988">Suicide and Crisis Lifeline</a>
                             <br />
-                            <a href="https://medium.com/mental-health-league/7-inspiring-stories-on-mental-health-you-should-read-bb5bf1552e95" target="_blank">7 Inspiring Stories</a>
+                            <a href="https://medium.com/mental-health-league/7-inspiring-stories-on-mental-health-you-should-read-bb5bf1552e95" target="_blank" rel='noreferrer'>7 Inspiring Stories</a>
                             <br />
-                            <a href="https://www.verywellmind.com/what-is-mental-health-2330755" target="_blank">What is Mental Health?</a>
+                            <a href="https://www.verywellmind.com/what-is-mental-health-2330755" target="_blank" rel='noreferrer'>What is Mental Health?</a>
                             <br />
-                            <a href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/five-steps-to-mental-wellbeing/" target="_blank">The Do's and Don'ts</a>
+                            <a href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/five-steps-to-mental-wellbeing/" target="_blank" rel='noreferrer'>The Do's and Don'ts</a>
                             <br />
-                            <a href="https://www.mentalhealth.gov/">Mental Health Gov</a>
+                            <a href="https://www.mentalhealth.gov/" rel='noreferrer'>Mental Health Gov</a>
                         </div>
                         
                     </div>

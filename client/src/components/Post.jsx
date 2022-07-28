@@ -16,7 +16,7 @@ const Post = (props) => {
         axios.get(`http://localhost:8000/api/post/${post._id}`)
             .then(res => setPostInfo(res.data))
             .catch(err => console.log(err))
-    },[refresh])
+    },[refresh, post._id])
 
     const handlePostLikes = (postId) => {
         {liked?
