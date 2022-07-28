@@ -22,7 +22,5 @@ const server = app.listen(port, () => console.log(`Listening on port: ${port}`))
 const io = require('socket.io')(server, { cors: true });
 
 io.on('connection', socket => {
-    socket.on('event_from_client', data => {
-        socket.broadcast.emit('send_data_to_all_other_clients', data);
-    });
+    socket.emit('message', 'Welcome to ShareChat');
 });

@@ -4,6 +4,8 @@ import '../static/Quote.css'
 
 const Quote = () => {
     const [quote, setQuote] = useState({})
+    const [image, setImage] = useState()
+    console.log(image)
 
     useEffect(() => {
         axios.get(`https://type.fit/api/quotes`)
@@ -14,9 +16,15 @@ const Quote = () => {
             .catch(err => console.log(err))
     }, [])
 
+    useEffect(() => {
+        axios.get(`https://picsum.photos/580/350/`)
+            .then(res => setImage(res.request.responseURL))
+            .catch(err => console.log(err))
+    }, [])
+
     
     return (
-        <div className='quote' style={{backgroundImage : "url(https://picsum.photos/580/350/)"}} >
+        <div className='quote' style={{backgroundImage : `url(${image})`}} >
             {quote&&
             <div style={{marginTop : "10px"}}>
                 <h3 id='quote'>"{quote.text}"</h3>
