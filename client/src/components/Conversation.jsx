@@ -76,6 +76,7 @@ const Conversation = (props) => {
             <div>
                 <form onSubmit={sendMessage} className="chatFooter">
                     <textarea name="message" id="message" cols="35" className='form-control'rows="2" onChange={(e) => setNewMessage(e.target.value)} value={newMessage}></textarea>
+                    <span style={{width : "3px"}}></span>
                     <button type='submit' className='btn btn-outline-primary'>Send</button>
                 </form>
             </div>
