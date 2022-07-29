@@ -130,7 +130,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    border: 2px solid black;
+    box-shadow: 0px 0px 7px rgb(65, 65, 65);
     border-radius: 10px;
     background-color: #d2cdcb;
     padding: 20px;
