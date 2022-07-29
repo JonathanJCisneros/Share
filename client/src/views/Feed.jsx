@@ -25,15 +25,17 @@ const Feed = () => {
     const location = useLocation();
 
     useEffect(() => {
-        setUser(location.state.message)
-    }, [])
+        axios.get(`http://localhost:8000/api/user/${location.state.message}`)
+            .then(res => setUser(res.data))
+            .catch(err => console.log(err))
+    }, [refresh])
 
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/user/checkUser`, {withCredentials : true})
             .then(res => console.log(res.data))
             .catch(err => navigate('/', {state : {message : "You must log in to use this information"}}))
-    }, [refresh, navigate])
+    }, [navigate])
 
     const logout = () => {
         axios.get(`http://localhost:8000/api/user/logout`, {withCredentials : true})
@@ -117,7 +119,7 @@ const Feed = () => {
                     </div>
                     <div id="rbottom">
                         <h4>Resource Links</h4>
-                        <a href="tel:988">Suicide and Crisis Lifeline</a>
+                        <a href="tel:988" className="btn btn-outline-danger" data-mdb-ripple-color="dark">Suicide and Crisis Lifeline</a>
                         <br />
                         <a href="https://medium.com/mental-health-league/7-inspiring-stories-on-mental-health-you-should-read-bb5bf1552e95" target="_blank" rel='noreferrer'>7 Inspiring Stories</a>
                         <br />

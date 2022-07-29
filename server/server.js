@@ -24,12 +24,5 @@ const server = app.listen(port, () => console.log(`Listening on port: ${port}`))
 const io = require('socket.io')(server, { cors: true });
 
 io.on('connection', socket => {
-
-    socket.emit('message', 'Welcome to Chat!')
-
-    socket.broadcast.emit('message', 'A user has joined the chat');
-
-    socket.on('disconnect', () => {
-        io.emit('message', 'A user has left the chat')
-    })
+    io.emit("Welcome", "Hello, this is a socket connection")
 });
