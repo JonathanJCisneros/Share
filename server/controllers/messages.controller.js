@@ -7,7 +7,7 @@ module.exports = {
             .catch(err => res.json(err))
     },
 
-    getOne : (req, res) => {
+    getById : (req, res) => {
         Message.find({conversationId : req.params.conversationId})
             .then(conversation => res.json(conversation))
             .catch(err => res.status(400).json(err))

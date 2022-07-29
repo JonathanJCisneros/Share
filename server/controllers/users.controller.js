@@ -13,7 +13,12 @@ module.exports = {
             })
     },
 
-
+    getOne : (req, res) => {
+        User.findOne(req.params)
+            .then(user => res.json(user))
+            .catch(err => res.json(err))
+    },
+    
     register : (req, res) => {
         User.find({email : req.body.email})
             .then(userEmail => {

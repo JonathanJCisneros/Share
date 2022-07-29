@@ -48,6 +48,16 @@
     top: 20px;
 }
 
+.chat {
+    margin-top: 20px;
+    padding: 25px;
+    box-shadow: 0px 0px 7px rgb(65, 65, 65);
+    border-radius: 10px;
+    background-color: #A2BCE0;
+    position: sticky;
+    top: 130px;
+}
+
 .userName {
     font-family: 'Mochiy Pop One', sans-serif;
     color: white;
@@ -129,6 +139,19 @@
 .choices {
     display: flex;
     justify-content: space-around;
+}
+
+.messenger {
+    margin-top: 20px;
+    padding: 10px;
+    height: 400px;
+    width: 350px;
+    box-shadow: 0px 0px 7px rgb(65, 65, 65);
+    border-radius: 10px;
+    background-color: #A2BCE0;
+    position: fixed;
+    bottom: -5px;
+    right: 250px;
 }
 
 #myBtn {

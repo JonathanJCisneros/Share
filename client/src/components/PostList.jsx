@@ -3,7 +3,6 @@ import axios from 'axios'
 import '../static/PostList.css';
 import Post from './Post';
 import Quote from './Quote';
-import Chat from './Chat';
 
 const PostList = (props) => {
     const {user} = props;
@@ -63,7 +62,6 @@ const PostList = (props) => {
                     <Quote/>}
                 </div>)
             })}
-            
         </div>
     )
 }
