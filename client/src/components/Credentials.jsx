@@ -35,7 +35,7 @@ const Credentials = (props) => {
                     .then(res => callBack())
                     .catch(err => setErrors(err.response.data.errors))
                 :axios.post(`http://localhost:8000/api/user/register`, {firstName, lastName, animal, color, email, password, confirmPassword}, {withCredentials : true})
-                .then(res => navigate('/feed'))
+                .then(res => navigate('/feed', {state : {message : res.data._id}}))
                 .catch(err => setErrors(err.response.data.errors))
         }
     }
