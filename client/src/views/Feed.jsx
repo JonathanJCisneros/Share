@@ -104,11 +104,11 @@ const Feed = () => {
                     </div>
                     {chat?
                     <div className='chat'>
-                        <Chat user ={user} callBack={handleMessages}/>
+                        <Chat user={user} callBack={handleMessages}/>
                     </div>:""}
                 </div>
                 <div className="feed">
-                    <PostList user={user}/>
+                    <PostList user={user} callBack={handleMessages}/>
                 </div>
                 <div className="right">
                     <div id="rtop">

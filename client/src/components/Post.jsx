@@ -4,7 +4,7 @@ import '../static/Post.css';
 import { useEffect } from 'react';
 
 const Post = (props) => {
-    const {user, post} = props;
+    const {user, post, callBack} = props;
     const [postInfo, setPostInfo] = useState(post)
     const [comment, setComment] = useState(false);
     const [liked, setLiked] = useState(false);
@@ -17,6 +17,13 @@ const Post = (props) => {
             .then(res => setPostInfo(res.data))
             .catch(err => console.log(err))
     },[refresh, post._id])
+
+    // Start a new chat
+    const newChat = (friendId, userId, animal, color) => {
+        axios.post(`http://localhost:8000/api/conversation/new`, {senderId : userId, receiverId : friendId, animal, color})
+            .then(res => callBack(res.data))
+            .catch(err => console.log(err))
+    }
 
     const handlePostLikes = (postId) => {
         {liked?
@@ -40,6 +47,7 @@ const Post = (props) => {
         }
     }
 
+
     const handleComment = (e) =>{
         e.preventDefault()
         axios.post(`http://localhost:8000/api/comment`, {animal : user.animal, color: user.color, postId, userId : user._id, comment : commentPost, likes : 0})
@@ -53,7 +61,7 @@ const Post = (props) => {
                 <div className='postProfileImage' style={{backgroundColor : postInfo.userId === user._id? user.color:postInfo.color}}>
                     <img src={`https://anonymous-animals.azurewebsites.net/animal/${postInfo.userId === user._id? user.animal:postInfo.animal}`} alt="Animal" />
                 </div>
-                <h4 style={{color : postInfo.userId === user._id? "white": "black"}}>{postInfo.userId === user._id? "You": "Anonymous " + postInfo.animal.charAt(0).toUpperCase() + postInfo.animal.slice(1)}</h4>
+                <h4 style={{color : postInfo.userId === user._id? "white": "black"}}>{postInfo.userId === user._id? "You": <button className="btn btn-link" onClick={()=>newChat(postInfo.userId, user._id, postInfo.animal, postInfo.color)} style={{padding : "0px", textDecoration : "none"}}>{"Anonymous " + postInfo.animal.charAt(0).toUpperCase() + postInfo.animal.slice(1)}</button>}</h4>
             </div>
             <div className='postContent'>
                 <h4>{postInfo.title}</h4>

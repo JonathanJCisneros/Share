@@ -58,7 +58,7 @@ const Conversation = (props) => {
                 <button type="button" onClick={()=> callBack()} className="btn-close" aria-label="Close"></button>
             </div>
             <div className="messageContent" ref={scrollRef}>
-                {messages&&
+                {messages.length !== 0?
                     messages.map((message, i) => {
                         return (<div key={i} className='messageBubble' style={{backgroundColor : message.sender === user._id? "#1982FC": "lightgray", marginRight : message.sender === user._id? "0px": "auto", marginLeft : message.sender === user._id? "auto" :"0px"}}>
                         <div className='messageHeader'>
@@ -69,7 +69,8 @@ const Conversation = (props) => {
                         </div>
                         <p className='messages'>{message.text}</p>
                     </div>)
-                    })
+                    }):
+                    <h3>Start a conversation with your new friend!</h3>
                 }
             </div>
             <div>

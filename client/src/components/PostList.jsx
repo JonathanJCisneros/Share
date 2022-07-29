@@ -5,7 +5,7 @@ import Post from './Post';
 import Quote from './Quote';
 
 const PostList = (props) => {
-    const {user} = props;
+    const {user, callBack} = props;
     const [addPost, setAddPost] = useState(false)
     const [postList, setPostList] = useState([])
     const [refresh, setRefresh] = useState(false)
@@ -57,7 +57,7 @@ const PostList = (props) => {
             
             {postList.map((post, i) => {
                 return (<div key={i}>
-                    <Post post={post} user={user} />
+                    <Post post={post} user={user} callBack={callBack}/>
                     {i % 4 === 0&&
                     <Quote/>}
                 </div>)
