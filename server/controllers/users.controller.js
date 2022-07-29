@@ -58,9 +58,10 @@ module.exports = {
 
     checkIfUser : (req, res) => {
         const decodedJWT = jwt.decode(req.cookies.usertoken, {complete : true})
+        
         User.findOne({_id : decodedJWT.payload.id})
             .then(user => res.json(user))
-            .catch(err => res.json(err))
+            .catch(err => console.log(decodedJWT) + res.json(err))
     },
 
 

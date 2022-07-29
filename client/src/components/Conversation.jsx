@@ -12,13 +12,13 @@ const Conversation = (props) => {
         axios.get(`http://localhost:8000/api/user/${conversation.members[1]}`)
             .then(res => setFriend(res.data))
             .catch(err => console.log(err))
-    }, [])
+    }, [conversation.members])
 
     useEffect (() => {
         axios.get(`http://localhost:8000/api/messages/${conversation._id}`)
             .then(res => setMessages(res.data))
             .catch(err => console.log(err))
-    }, [refresh])
+    }, [refresh, conversation._id])
 
     return (
         <div>

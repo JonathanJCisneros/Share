@@ -28,7 +28,7 @@ const Credentials = (props) => {
         e.preventDefault()
         {newOrUpdate === false?
             axios.post(`http://localhost:8000/api/user/login`, {email, password}, {withCredentials : true})
-                .then(res => navigate('/feed'))
+                .then(res => navigate('/feed', {state : {message : res.data}}))
                 .catch(err => setErrors(err.response.data.errors)):
             updateProfile?
                 axios.put(`http://localhost:8000/api/user/update/${user}`, {firstName, lastName, animal, color, email})

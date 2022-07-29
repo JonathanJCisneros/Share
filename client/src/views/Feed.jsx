@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Chat from '../components/Chat';
 import axios from 'axios';
 import '../static/Feed.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import PostList from '../components/PostList';
 import Credentials from '../components/Credentials';
 import Conversation from '../components/Conversation';
@@ -15,7 +15,6 @@ const Feed = () => {
     const [messenger, setMessenger] = useState(false)
     const [conversation, setConversation] = useState("")
 
-    console.log(user)
 
     const [refresh, setRefresh] = useState(true)
 
@@ -23,10 +22,16 @@ const Feed = () => {
 
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        setUser(location.state.message)
+    }, [])
+
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/user/checkUser`, {withCredentials : true})
-            .then(res => console.log(res) + setUser({_id : res.data._id, firstName : res.data.firstName, lastName : res.data.lastName, animal : res.data.animal, color : res.data.color, email : res.data.email}))
+            .then(res => console.log(res.data))
             .catch(err => navigate('/', {state : {message : "You must log in to use this information"}}))
     }, [refresh, navigate])
 
