@@ -33,7 +33,7 @@ const Feed = () => {
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/user/checkUser`, {withCredentials : true})
-            .then(res => console.log(res.data))
+            .then(res => console.log(res))
             .catch(err => navigate('/', {state : {message : "You must log in to use this information"}}))
     }, [navigate])
 
