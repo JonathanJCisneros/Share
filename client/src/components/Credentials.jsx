@@ -110,11 +110,17 @@ const Credentials = (props) => {
                         :<button type='button' className='btn btn-link' onClick={()=>setNewOrUpdate(true) + setErrors({}) + setEmail("") + setPassword("")}>Don't have an account yet? Sign Up!</button>
                     }
                     <br />
-                    <button type='submit' className='btn btn-success'>
-                        {newOrUpdate? 
-                            updateProfile? "Update": "Create Account"
-                            : "Log In"}
-                    </button>
+                    <div style={{display : "flex", alignItems : "center", justifyContent : "space-evenly"}}>
+                        <button type='submit' className='btn btn-success'>
+                            {newOrUpdate? 
+                                updateProfile? "Update": "Create Account"
+                                : "Log In"}
+                        </button>
+                        {newOrUpdate?
+                            "":
+                        <button className='btn btn-primary' onClick={()=> setEmail("alex@miller.com") + setPassword("test1234")}>Test</button>}
+                    </div>
+                    
                 </form>
             </div>
     )
