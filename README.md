@@ -14,4 +14,4 @@ their hardest times with a supportive community.
 
 ## Login/Register
 
-<img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/LogIn.png" width="425" alt="Log-In Page" title="Log-In Page"> <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/Register.png" alt="Register Page" width="425" title="Register Page">
+<img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/LogIn.png" width="425" height="380" alt="Log-In Page" title="Log-In Page"> <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/Register.png" alt="Register Page" width="425" height="380" title="Register Page">
