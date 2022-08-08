@@ -1,8 +1,7 @@
 
 # Share.
 
-This is my second project called Share. It's a social media platform where every user has an anonymous identity and is able to share
-their hardest times with a supportive community. 
+Share. is an online platform dedicated to improving mental health. Users are kept anonymous for privacy so they can engage with the community without any worry about identity. The platform is built for Users to post about their struggles or like, comment other anonymous posts. If the User feels the need to message something private to the specific owner of a post they can send a message via chat where they can engage a conversation. Every 3-4 posts their is an anonymous positive influencing quote that appears to help maintain a positive atmosphere as the community engages with the platform. Important articles and helpful links are on the right side of their feed at all times, on the left, the ability to update User information as well as access the different conversations that the User has had with the community. 
 
 # Tech Stack
 
@@ -14,4 +13,4 @@ their hardest times with a supportive community.
 
 ## Login/Register
 
-<img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/LogIn.png" width="425" height="380" alt="Log-In Page" title="Log-In Page"> <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/Register.png" alt="Register Page" width="425" height="380" title="Register Page">
+<img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/LogIn.png" width="435" height="330" alt="Log-In Page" title="Log-In Page"> <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/Register.png" alt="Register Page" width="435" height="330" title="Register Page">
