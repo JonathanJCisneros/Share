@@ -18,3 +18,5 @@ Share. is an online platform dedicated to improving mental health. Users are kep
 ## Login/Register
 
 <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/LogIn.png" width="435" height="330" alt="Log-In Page" title="Log-In Page"> <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/Register.png" alt="Register Page" width="435" height="330" title="Register Page">
+
+The HomePage present you with ability to login or register, each User selects an Anonymous animal and background color of choice to be represented to the community, keeping all identities anonymous.
