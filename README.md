@@ -19,4 +19,13 @@ Share. is an online platform dedicated to improving mental health. Users are kep
 
 <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/LogIn.png" width="435" height="330" alt="Log-In Page" title="Log-In Page"> <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/Register.png" alt="Register Page" width="435" height="330" title="Register Page">
 
-The HomePage present you with ability to login or register, each User selects an Anonymous animal and background color of choice to be represented to the community, keeping all identities anonymous.
+The Home Page present you with ability to login or register, each User selects an Anonymous animal and background color of choice to be represented to the community, keeping all identities anonymous.
+
+
+## User Feed
+
+<img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/UserFeed.png" alt="User Feed Page" title="User Feed Page"> 
+
+Once logged in, the User is redirected to the User feed where the User can post, like, comment and engage with others. Your own personal posts with be a blue color, if you decide to comment on a post, it will appear in the comment section in the color blue and on the opposite side of other comments posted.
+
+
