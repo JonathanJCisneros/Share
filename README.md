@@ -6,6 +6,7 @@ Share. is an online platform dedicated to improving mental health. Users are kep
 # Tech Stack
 
 **Client:** React.js, Axios, Socket.io, CSS, Bootstrap
+
 **Server:** MongoDB, Express, Node.js, Cors, Bcrypt
 
 
