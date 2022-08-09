@@ -29,3 +29,6 @@ The Home Page present you with ability to login or register, each User selects a
 Once logged in, the User is redirected to the User feed where the User can post, like, comment and engage with others. Your own personal posts with be a blue color, if you decide to comment on a post, it will appear in the comment section in the color blue and on the opposite side of other comments posted.
 
 
+## Chat
+
+<img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/OpeningChat.png" alt="Opening Chat" title="Opening Chat">
