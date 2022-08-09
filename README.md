@@ -32,3 +32,5 @@ Once logged in, the User is redirected to the User feed where the User can post,
 ## Chat
 
 <img src="https://github.com/JonathanJCisneros/share/blob/master/READMEPhotos/OpeningChat.png" alt="Opening Chat" title="Opening Chat">
+
+The header of each post that doesn't belong to the User is a link that opens up a new conversation, giving the User the ability to message the owner of the post directly. If the User logs out and logs back in later, they can always reopen the conversation via the chat button on the left of their feed.
