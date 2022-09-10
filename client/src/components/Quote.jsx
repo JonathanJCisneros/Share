@@ -25,7 +25,7 @@ const Quote = () => {
     return (
         <div className='quote' style={{backgroundImage : `url(${image})`}} >
             {quote&&
-            <div style={{marginTop : "10px"}}>
+            <div className='quoteDetails'>
                 <h3 id='quote'>"{quote.text}"</h3>
                 <h2 id='author'>-{quote.author === null? "Anonymous": quote.author}</h2>
             </div>}

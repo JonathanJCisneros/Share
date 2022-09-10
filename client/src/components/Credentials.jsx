@@ -53,12 +53,12 @@ const Credentials = (props) => {
                             <div className='col'>
                                 <label htmlFor="firstName" className='form-label'>First Name</label>
                                 <input type="text" className='form-control' name='firstName' onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
-                                {errors.hasOwnProperty("firstName")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.firstName.message}</p>}
+                                {errors.hasOwnProperty("firstName")&& <p className='error'>{errors.firstName.message}</p>}
                             </div>
                             <div className='col'>
                                 <label htmlFor="lastName" className='form-label'>Last Name</label>
                                 <input type="text" className='form-control' name='lastName' onChange={(e) => setLastName(e.target.value)} value={lastName}/>
-                                {errors.hasOwnProperty("lastName")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.lastName.message}</p>}
+                                {errors.hasOwnProperty("lastName")&& <p className='error'>{errors.lastName.message}</p>}
                             </div>
                         </div>
                         <div className='col-12' id='animal'>
@@ -68,13 +68,13 @@ const Credentials = (props) => {
                                     <option selected>Choose your avatar...</option>
                                     {animalList.map((animal, i) => <option key={i} value={animal.toLowerCase()}>{animal}</option>)}
                                 </select>
-                                {errors.hasOwnProperty("animal")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.animal.message}</p>}
+                                {errors.hasOwnProperty("animal")&& <p className='error'>{errors.animal.message}</p>}
                             </div>
                             <div>
                                 <label htmlFor="color">Select Background Color</label>
                                 <br />
                                 <input type="color" name='color' onChange={(e) => setColor(e.target.value)} value={color}/>
-                                {errors.hasOwnProperty("color")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.color.message}</p>}
+                                {errors.hasOwnProperty("color")&& <p className='error'>{errors.color.message}</p>}
                             </div>
                             <div className='registerProfileImage' style={{backgroundColor : color === ""? "lightgray": color}}>
                                 <img src={`https://anonymous-animals.azurewebsites.net/animal/${animal}`} alt="Select Animal" />
@@ -86,13 +86,13 @@ const Credentials = (props) => {
                     <div className='col-12'>
                         <label htmlFor="email" className='form-label'>Email</label>
                         <input type="text" id='email' name='email' className='form-control' onChange={(e) => setEmail(e.target.value)} value={email}/>
-                        {errors.hasOwnProperty("email")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.email.message}</p>}
+                        {errors.hasOwnProperty("email")&& <p className='error'>{errors.email.message}</p>}
                     </div>
                     {updateProfile? ""
                     :<div className='col-12'>
                         <label htmlFor="password" className='form-label'>Password</label>
                         <input type="password" id='password' className='form-control' name='password' onChange={(e) => setPassword(e.target.value)} value={password}/>
-                        {errors.hasOwnProperty("password")&&<p style={{color : "red", fontWeight : "bold"}}>{errors.password.message}</p>}
+                        {errors.hasOwnProperty("password")&&<p className='error'>{errors.password.message}</p>}
                     </div>}
                     {newOrUpdate === true?
                     <>
@@ -100,7 +100,7 @@ const Credentials = (props) => {
                         :<div>                            
                             <label htmlFor="confirmPassword" className='form-label'>Confirm Password</label>
                             <input type="password" className='form-control' name='confirmPassword' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword}/>
-                            {errors.hasOwnProperty("confirmPassword")&&<p style={{color : "red", fontWeight : "bold"}}>{errors.confirmPassword.message}</p>}
+                            {errors.hasOwnProperty("confirmPassword")&&<p className='error'>{errors.confirmPassword.message}</p>}
                         </div>}
                         {updateProfile?
                             <button className='btn btn-link' onClick={()=> callBack()}>Nevermind...</button>:

@@ -61,14 +61,15 @@ const Post = (props) => {
                 <div className='postProfileImage' style={{backgroundColor : postInfo.userId === user._id? user.color:postInfo.color}}>
                     <img src={`https://anonymous-animals.azurewebsites.net/animal/${postInfo.userId === user._id? user.animal:postInfo.animal}`} alt="Animal" />
                 </div>
-                <h4 style={{color : postInfo.userId === user._id? "white": "black"}}>{postInfo.userId === user._id? "You": <button className="btn btn-link" onClick={()=>newChat(postInfo.userId, user._id, postInfo.animal, postInfo.color)} style={{padding : "0px", textDecoration : "none"}}>{"Anonymous " + postInfo.animal.charAt(0).toUpperCase() + postInfo.animal.slice(1)}</button>}</h4>
+                <h4 style={{color : postInfo.userId === user._id? "white": "black"}}>{postInfo.userId === user._id? "You": <button className="btn btn-link chatLink" onClick={()=>newChat(postInfo.userId, user._id, postInfo.animal, postInfo.color)}>{"Anonymous " + postInfo.animal.charAt(0).toUpperCase() + postInfo.animal.slice(1)}</button>}</h4>
             </div>
             <div className='postContent'>
                 <h4>{postInfo.title}</h4>
                 <p>{postInfo.content}</p>
             </div>
             <div className='likes'>
-                <span style={{marginRight : "25px"}}>{postInfo.likes} Likes</span><button onClick={()=>handlePostLikes(postInfo._id)} className={liked? "btn btn-outline-success": "btn btn-outline-primary"} id='likes'>{liked? "Liked": "Like"}</button>
+                <span className='likeCount'>{postInfo.likes} Likes</span>
+                <button onClick={()=>handlePostLikes(postInfo._id)} className={liked? "btn btn-outline-success": "btn btn-outline-primary"} id='likes'>{liked? "Liked": "Like"}</button>
                 <button onClick={handleCommentSection} id='comment' className='btn btn-outline-dark'>Comment</button>
             </div>
             <div className='commentSection'>
@@ -88,8 +89,8 @@ const Post = (props) => {
             <div>
                 <form onSubmit={handleComment}>
                     <input type="text" className='form-control' name='comments' onChange={(e) => setCommentPost(e.target.value)} value={commentPost} placeholder="Add your comment here!"/>
-                    <button type='submit' onClick={()=> setPostId(post._id)} className='btn btn-outline-success' style={{marginTop : "10px"}}>Comment</button>
-                    {errors.hasOwnProperty("comment")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.comment.message}</p>}
+                    <button type='submit' onClick={()=> setPostId(post._id)} className='btn btn-outline-success commentButton'>Comment</button>
+                    {errors.hasOwnProperty("comment")&& <p className='error'>{errors.comment.message}</p>}
                 </form>
             </div>:""}
         </div>

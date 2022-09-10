@@ -1,12 +1,21 @@
 .post {
     box-shadow: 0px 0px 5px rgb(75, 75, 75);
-    border-radius: 10px;
+    border-radius: 3px;
     min-height: 250px;
     max-height: 600px;
     margin: 30px 0px;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 20px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.likeCount {
+    margin-right: 25px;
 }
 
 .postHeader {
@@ -32,6 +41,11 @@
 .postHeader h4 {
     margin-left: 10px;
     font-family: 'Mochiy Pop One', sans-serif;
+}
+
+.chatLink {
+    all: unset;
+    cursor: pointer;
 }
 
 .postContent {
@@ -121,3 +135,6 @@
     font-size: 13px;
 }
 
+.commentButton {
+    margin-top: 10px;
+}
