@@ -7,7 +7,7 @@
 
 .chatProfileImage {
     box-shadow: 0px 0px 3px rgb(75, 75, 75);
-    border-radius: 15px;
+    border-radius: 50%;
     height: 30px;
     width: 30px;
     margin: 0px;
