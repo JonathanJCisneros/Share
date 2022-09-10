@@ -33,7 +33,7 @@
 #ltop {
     padding: 1px 0px 20px 0px;
     box-shadow: 0px 0px 7px rgb(65, 65, 65);
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: #A2BCE0;
 }
 
@@ -42,7 +42,7 @@
     padding: 25px;
     height: 90px;
     box-shadow: 0px 0px 7px rgb(65, 65, 65);
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: #A2BCE0;
     position: sticky;
     top: 20px;
@@ -52,7 +52,7 @@
     margin-top: 20px;
     padding: 25px;
     box-shadow: 0px 0px 7px rgb(65, 65, 65);
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: #A2BCE0;
     position: sticky;
     top: 130px;
@@ -95,7 +95,7 @@
     padding-top: 30px;
     padding-bottom: 30px;
     box-shadow: 0px 0px 7px rgb(65, 65, 65);
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: #A2BCE0;
 }
 
@@ -104,7 +104,7 @@
     padding-top: 30px;
     padding-bottom: 30px;
     box-shadow: 0px 0px 7px rgb(65, 65, 65);
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: #A2BCE0;
     position: sticky;
     top: 20px;
@@ -131,7 +131,7 @@
     transform: translate(-50%, -50%);
     width: 400px;
     box-shadow: 0px 0px 7px rgb(65, 65, 65);
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: #d2cdcb;
     padding: 20px;
 }

@@ -38,15 +38,16 @@ const PostList = (props) => {
             <div className='newPost'>
                 <h4>New Post</h4>
                 <form onSubmit={createPost}>
-                    <label htmlFor="title" className='form-label'>Title</label>
-                    <br />
-                    <input type="text" name='title' className="form-control" onChange={(e)=> setTitle(e.target.value)} value={title}/>
-                    {errors.hasOwnProperty("title")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.title.message}</p>}
-                    <label htmlFor="content" className='form-label'>Content</label>
-                    <br />
-                    <textarea type="text" name='content' className="form-control" onChange={(e) => setContent(e.target.value)} value={content} rows="4" cols="40"/>
-                    {errors.hasOwnProperty("content")&& <p style={{color : "red", fontWeight : "bold"}}>{errors.content.message}</p>}
-                    <br />
+                    <div className='formRow'>
+                        <label htmlFor="title" className='form-label'>Title</label>
+                        <input type="text" name='title' className="form-control" onChange={(e)=> setTitle(e.target.value)} value={title}/>
+                        {errors.hasOwnProperty("title")&& <p className='error'>{errors.title.message}</p>}
+                    </div>
+                    <div className='formRow'>
+                        <label htmlFor="content" className='form-label'>Content</label>
+                        <textarea type="text" name='content' className="form-control" onChange={(e) => setContent(e.target.value)} value={content} rows="4" cols="40"/>
+                        {errors.hasOwnProperty("content")&& <p className='error'>{errors.content.message}</p>}
+                    </div>
                     <div className='footer'>
                         <button onClick={()=> setAddPost(false) + setTitle("") + setContent("")} className="btn btn-outline-secondary">Nevermind</button>
                         <button type='submit' className='btn btn-outline-success'>Post</button>

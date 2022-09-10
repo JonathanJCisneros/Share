@@ -9,6 +9,16 @@
     padding: 20px;
 }
 
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.formRow {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 #quote {
     font-family: 'Paytone One', sans-serif;
     color: white;
@@ -49,4 +59,5 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: 25px;
 }
