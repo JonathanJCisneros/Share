@@ -99,6 +99,11 @@
     background-color: #A2BCE0;
 }
 
+.space {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 #rbottom {
     margin-top: 20px;
     padding-top: 30px;

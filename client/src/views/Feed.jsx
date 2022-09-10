@@ -95,9 +95,12 @@ const Feed = () => {
                         <div className='profileImage' style={{backgroundColor : user.color}}>
                             <img src={`https://anonymous-animals.azurewebsites.net/animal/${user.animal}`} alt="Animal" />
                         </div>
-                        <h4 className='userName'>{user.firstName} {user.lastName}</h4>
-                        <br />
-                        <button className='btn btn-outline-secondary' onClick={()=> setUpdateInfo(true)}>Update Profile</button>
+                        <div className='space'>
+                            <h4 className='userName'>{user.firstName} {user.lastName}</h4>
+                        </div>
+                        <div className='space'>
+                            <button className='btn btn-outline-secondary' onClick={()=> setUpdateInfo(true)}>Update Profile</button>
+                        </div>
                     </div>
                     <div id="lbottom">
                         <button className='btn btn-outline-success' onClick={handleChat}>Chat</button>
@@ -112,22 +115,30 @@ const Feed = () => {
                 </div>
                 <div className="right">
                     <div id="rtop">
-                        <button onClick={logout} className='btn btn-outline-danger'>Logout</button>
-                        <br />
-                        <br />
-                        <button className='btn btn-outline-success' onClick={()=>setDeleteAttempt(true)}>Delete Account</button>
+                        <div className='space'>
+                            <button onClick={logout} className='btn btn-outline-danger'>Logout</button>
+                        </div>
+                        <div className='space'>
+                            <button className='btn btn-outline-success' onClick={()=>setDeleteAttempt(true)}>Delete Account</button>
+                        </div>
                     </div>
                     <div id="rbottom">
                         <h4>Resource Links</h4>
-                        <a href="tel:988" className="btn btn-outline-danger" data-mdb-ripple-color="dark">Suicide and Crisis Lifeline</a>
-                        <br />
-                        <a href="https://medium.com/mental-health-league/7-inspiring-stories-on-mental-health-you-should-read-bb5bf1552e95" target="_blank" rel='noreferrer'>7 Inspiring Stories</a>
-                        <br />
-                        <a href="https://www.verywellmind.com/what-is-mental-health-2330755" target="_blank" rel='noreferrer'>What is Mental Health?</a>
-                        <br />
-                        <a href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/five-steps-to-mental-wellbeing/" target="_blank" rel='noreferrer'>The Do's and Don'ts</a>
-                        <br />
-                        <a href="https://www.mentalhealth.gov/" rel='noreferrer'>Mental Health Gov</a>
+                        <div className='space'>
+                            <a href="tel:988" className="btn btn-outline-danger" data-mdb-ripple-color="dark">Suicide and Crisis Lifeline</a>
+                        </div>
+                        <div className='space'>
+                            <a href="https://medium.com/mental-health-league/7-inspiring-stories-on-mental-health-you-should-read-bb5bf1552e95" target="_blank" rel='noreferrer'>7 Inspiring Stories</a>
+                        </div>
+                        <div className='space'>
+                            <a href="https://www.verywellmind.com/what-is-mental-health-2330755" target="_blank" rel='noreferrer'>What is Mental Health?</a>
+                        </div>
+                        <div className='space'>
+                            <a href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/five-steps-to-mental-wellbeing/" target="_blank" rel='noreferrer'>The Do's and Don'ts</a>
+                        </div>
+                        <div className='space'>
+                            <a href="https://www.mentalhealth.gov/" rel='noreferrer'>Mental Health Gov</a>
+                        </div>
                     </div>
                     
                 </div>
